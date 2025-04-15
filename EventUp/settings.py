@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-k%kmsc@7je!t^qx7-=xu(*&39#@@gn4vq7z-zzj^x1#h%4f$79
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['eventup-twfp.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['eventup-ez7x.onrender.com', 'localhost', '127.0.0.1']
 
 # Application definition
 
