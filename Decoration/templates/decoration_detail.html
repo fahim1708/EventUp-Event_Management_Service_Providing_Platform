@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% load static %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="{% static 'css\global.css' %}">
+    <link rel="stylesheet" href="{% static 'css\decoration_detail.css' %}">
+    <link rel="stylesheet" href="{% static 'css\decoration.css' %}">
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Wellfleet:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open Sans:wght@600&display=swap"
+    />
+    <title>{{ package.title }}</title>
+  </head>
+  <body>
+    {% include 'components\header.html'%} <!-- header -->
+    {% include 'components\back_button.html'%}
+    <div class="decoration-view-page-v2">
+      <section class="decoration-view-page-v2-inner">
+        <div class="frame-parent74">
+          {% comment %} <div class="back-button-area" id="navigationContainer">
+            <div class="back-button-icon">
+              <img
+                class="back-icon"
+                alt=""
+                src="{% static 'img/vector.svg'%}"
+              />
+            </div>
+            <a class="back-text" href="javascript:history.back()">Back</a>
+          </div> {% endcomment %}
+          <div class="frame-parent78">
+            <div class="rectangle-parent62">
+              <img
+                class="frame-child76"
+                loading="lazy"
+                alt="{{ package.title }}"
+                src="{{ package.image.url }}"
+              />
+
+              <div class="rectangle-parent63">
+                <div class="frame-child77"></div>
+                <div class="frame-parent79">
+                  <button class="image-wrapper">
+                    <div class="image4">Image</div>
+                  </button>
+                  <div class="frame-wrapper46">
+                    <div class="video-wrapper">
+                      <div class="video2">Video</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="party-info">
+              <div class="birthday-party-p1-group">
+                <h2 class="birthday-party-p1">{{ package.title }}</h2>
+                <div class="it-is-a-container">
+                  <p class="it-is-a">
+                    {{ package.description }}
+                  </p>
+                </div>
+              </div>
+              <div class="star-rating-parent">
+                <div class="star-rating">
+                  <div class="star-rating-container" data-rating="{{ average_rating }}"></div>
+                </div>
+                <div class="raings"><span> | </span>{{ reviewers_count }} <span>Ratings & reviews</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="decoration-view-page-v2-child"></div>
+      {% comment %} {% if not no_image %} {% endcomment %}
+        <section class="program-container-wrapper">
+          <div class="program-container">
+            <div class="program-header">
+              <h2 class="our-programme-image">Items of this Package</h2>
+              {% comment %} <div class="buttonread">
+                <div class="view-all">View All</div>
+              </div> {% endcomment %}
+            </div>
+            <div class="program-grid">
+              {% for item in items %}
+                {% comment %} {% if item.media_type == 'image' %} {% endcomment %}
+                  <div class="program-items">
+                    <img
+                      class="program-images-icon"
+                      alt="{{ item.item.Title }}"
+                      src="{{ item.item.Cover_Image.url }}"
+                    />
+                    <div class="momo-in-community">
+                      {{ item.item.Title }}
+                    </div>
+                  </div>
+                {% comment %} {% endif %} {% endcomment %}
+              {% endfor %}
+            </div>
+          </div>
+        </section>
+      {% comment %} {% endif %} {% endcomment %}
+
+      {% if not no_video %}
+      <section class="video-program-container-wrapper">
+        <div class="program-container">
+          <div class="video-program-header">
+            <h2 class="our-programme-image">Our Programme Video</h2>
+            {% comment %} <div class="buttonread">
+              <div class="view-all">View All</div>
+              <img class="iconarrow" alt="" src="./public/iconarrow@2x.png" />
+            </div> {% endcomment %}
+          </div>
+          <div class="video-program-grid">
+            {% for item in items %}
+            {% if item.media_type == 'video' %}
+              <div class="video-program-items">
+                  <video
+                    class="video-program-items-child"
+                    controls
+                    loading="lazy"
+                    alt=""
+                  >
+                    <source src="{{ item.file.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                <div class="momo-in-community8">
+                  {{ item.items_title }}
+                </div>
+              </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+      {% endif %}
+      <section class="rectangle-parent64">
+        <div class="frame-child78"></div>
+        <div class="review-container">
+          <div class="review-header">
+            <div class="ratings-reviews">
+              Ratings & Reviews of this Pakage
+            </div>
+            <div class="first-review-wrapper">
+              <div class="first-review">
+                <div class="top-review-rating">
+                  <div class="review-spacer">
+                    <span> {{ average_rating }} </span>
+                    <span class="span1">/5</span>
+                    <span> </span>
+                  </div>
+                  <div class="top-review-stars">
+                    <div class="star-rating-container" data-rating="{{ average_rating }}"></div>
+                  </div>
+                </div>
+                {% comment %} <div class="detailed-review-parent">
+                  <div class="detailed-review">
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-3.svg"
+                    />
+
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-3.svg"
+                    />
+
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-3.svg"
+                    />
+
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-3.svg"
+                    />
+
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-3.svg"
+                    />
+
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-3.svg"
+                    />
+
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-3.svg"
+                    />
+
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-3.svg"
+                    />
+
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-3.svg"
+                    />
+
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-5-3.svg"
+                    />
+
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-3.svg"
+                    />
+
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-3.svg"
+                    />
+
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-3.svg"
+                    />
+
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-5-3.svg"
+                    />
+
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-5-3.svg"
+                    />
+
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-3.svg"
+                    />
+
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-3.svg"
+                    />
+
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-5-3.svg"
+                    />
+
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-5-3.svg"
+                    />
+
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-5-3.svg"
+                    />
+
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-3.svg"
+                    />
+
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-5-3.svg"
+                    />
+
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-5-3.svg"
+                    />
+
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-5-3.svg"
+                    />
+
+                    <img
+                      class="detailed-review-child"
+                      alt=""
+                      src="./public/star-5-3.svg"
+                    />
+                  </div>
+                  <div class="bar-rating">
+                    <div class="rating-bars">
+                      <div class="review-bars">
+                        <div class="review-bars-child"></div>
+                        <div class="review-bars-item"></div>
+                        <div class="review-bars-inner"></div>
+                        <div class="review-bars-child1"></div>
+                        <div class="review-bars-child2"></div>
+                      </div>
+                    </div>
+                    <div class="empty-review">
+                      <div class="bar-values">256</div>
+                      <div class="bar-values1">126</div>
+                      <div class="bar-values2">78</div>
+                      <div class="bar-values3">84</div>
+                      <div class="bar-values4">8</div>
+                    </div>
+                  </div>
+                </div> {% endcomment %}
+              </div>
+            </div>
+          </div>
+          <div class="packages-and-items-reviews-parent">
+            <div class="packages-and-items" style="font-size:20px">Packages and Items Reviews</div>
+            {% for review in reviews %}
+              <div class="testimonial-container">
+                <div class="testimonial-items">
+                  <div class="testimonial-content">
+                      <div class="star-rating-container" data-rating="{{ review.rating }}"></div>
+                  </div>
+                  <div class="naimuzzaman-fahim" style="font-size: 16px;">{{ review.customer.Name }}</div>
+                </div>
+                <div class="testimonial-description">
+                  <div class="there-are-many">
+                    {{ review.review }}
+                  </div>
+                  <div class="see-more-button-wrapper">
+                    <div class="see-more-button2" id="seeMoreButton">
+                      {% comment %} <div class="see-more17">See More</div> {% endcomment %}
+                      <div class="vector-wrapper19">
+                          <img
+                            class="vector-icon22"
+                            alt=""
+                            src="./public/vector2.svg"
+                          />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+            <div class="review-actions">
+              <div class="mdilike-parent">
+              </div>
+              <div class="user-actions">
+                {% comment %} <div class="action-items-parent">
+                  <div class="action-items">
+                    <img
+                      class="action-items-child"
+                      loading="lazy"
+                      alt=""
+                      src="{% static 'img/group-625@2x.png'%}"
+                    />
+                  </div>
+                  <div class="action-items1">
+                    <div class="action-icons-wrapper">
+                      <div class="action-icons">1</div>
+                    </div>
+                  </div>
+                  <div class="action-items2">
+                    <div class="wrapper8">
+                      <div class="div25">2</div>
+                    </div>
+                  </div>
+                  <div class="action-items1">
+                    <div class="wrapper9">
+                      <div class="photo-u-r">3</div>
+                    </div>
+                  </div>
+                  <div class="photo-u-r-l-wrapper">
+                    <div class="photo-u-r">4</div>
+                  </div>
+                  <div class="user-name">
+                    <div class="name1">....</div>
+                  </div>
+                  <div class="action-items4">
+                    <div class="wrapper10">
+                      <div class="div27">120</div>
+                    </div>
+                  </div>
+                  <div class="user-location">
+                    <div class="location-wrapper">
+                      <div class="location6"></div>
+                    </div>
+                    <img
+                      class="vector-icon25"
+                      alt=""
+                      src="{% static 'img/vector-41.svg'%}"
+                    />
+                  </div>
+                  <div class="action-items">
+                    <img
+                      style="transform: rotate(180deg);"
+                      class="action-items-child"
+                      loading="lazy"
+                      alt=""
+                      src="{% static 'img/group-625@2x.png'%}"
+                    />
+                  </div>
+                </div> {% endcomment %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    {% include 'components\footer.html'%} <!-- footer -->
+    <script>
+      var navigationContainer = document.getElementById("navigationContainer");
+      if (navigationContainer) {
+        navigationContainer.addEventListener("click", function (e) {
+          window.location.href = "./decoration.html";
+        });
+      }
+      
+      var seeMoreButton = document.getElementById("seeMoreButton");
+      if (seeMoreButton) {
+        seeMoreButton.addEventListener("click", function (e) {
+          window.location.href = "./decoration2.html";
+        });
+      }
+      
+      var frameContainer = document.getElementById("frameContainer");
+      if (frameContainer) {
+        frameContainer.addEventListener("click", function (e) {
+          window.location.href = "./decoration2.html";
+        });
+      }
+      </script>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          // Get the star rating container
+          const starRatingContainers = document.querySelectorAll('.star-rating-container');
+      
+          starRatingContainers.forEach(container => {
+            // Get the rating from the data attribute
+            const rating = parseInt(container.getAttribute('data-rating'), 10);
+      
+            // Create star images based on the rating
+            for (let i = 0; i < 5; i++) {
+              const img = document.createElement('img');
+              img.className = 'star-rating-child';
+              img.alt = `Star ${i + 1}`;
+              
+              // Choose the correct star image based on the current index
+              if (i < rating) {
+                img.src = '{% static "img/star-1.svg" %}'; // Filled star
+              } else {
+                img.src = '{% static "img/star-1-1.svg" %}'; // Empty star
+              }
+      
+              // Append the image to the container
+              container.appendChild(img);
+            }
+          });
+        });
+      </script>
+      
+  </body>
+</html>

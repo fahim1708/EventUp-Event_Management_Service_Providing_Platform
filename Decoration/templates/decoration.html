@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% load static %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="{% static 'css\global.css' %}">
+    <link rel="stylesheet" href="{% static 'css\decoration.css' %}">
+    <link rel="stylesheet" href="{% static 'css\messages.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js\decoration.js' %}"></script>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Wellfleet:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"
+    />
+    <title>Decoration</title>
+  </head>
+  <body>
+    {% include 'components\header.html'%} <!-- header -->
+    {% if messages %}
+      <div id="popup" class="popup">
+        <ul>
+            {% for message in messages %}
+                <li>
+                    {{ message }}
+                </li>
+            {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+    <div class="decoration-1">
+      <section class="decoration-1-inner">
+        <div class="frame-parent30">
+          <div class="frame-wrapper23">
+            <div class="discover-the-best-decoration-f-parent">
+              <h1 class="discover-the-best-container">
+                <span>Discover the </span>
+                <span class="best-decoration">best decoration </span>
+                <span>for your programme</span>
+              </h1>
+              <img
+                class="arrow-01-icon"
+                loading="lazy"
+                alt=""
+                src="{% static 'img/arrow-01@2x.png' %}"
+              />
+            </div>
+          </div>
+          <div class="bg-parent8">
+            <div class="bg7"></div>
+            <div class="package-name-parent">
+              <button class="package-name1" id="packageName">
+                <div class="package1">PACKAGE</div>
+              </button>
+              <div class="item-name-wrapper">
+                <button class="item-name1" id="itemName">
+                  <div class="item1">ITEM</div>
+                </button>
+              </div>
+            </div>
+            <div>
+              {% comment %} <form method="GET" action="{% url 'decoration' %}" class="location-group">
+                <div class="location2">
+                    <div class="location-input"></div>
+                    <div class="location3">LOCATION</div>
+                    <div class="location-date">
+                        <div class="location-calendar">
+                            <img
+                                class="map-marker-icon1"
+                                loading="lazy"
+                                alt=""
+                                src="{% static 'img/map-marker@2x.png'%}"
+                            />
+                        </div>
+                        <div class="search-location1">
+                            <input class="location" type="text" id="location" name="location" autocomplete="off" placeholder="Enter location"/>
+                            <ul id="location-suggestions" class="dropdown-menu"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="property-type1">
+                  <div class="location-input"></div>
+                  <div class="from2">FROM</div>
+                  <div class="frame-parent31">
+                      <input class="april4" type="date" id="start_date" name="start_date" onchange="setEndDateMin()">
+                  </div>
+                </div>
+                <div class="price-range1">
+                  <div class="location-input"></div>
+                  <div class="to2">TO</div>
+                  <div class="price-range-inner1">
+                      <div class="frame-parent31">
+                          <input class="april4" type="date" name="end_date" id="end_date">
+                      </div>
+                  </div>
+                </div>  
+                <button class="iconlylight-outlinesearch-group" type="submit">
+                    <img
+                        class="iconlylight-outlinesearch1"
+                        alt=""
+                        src="{% static 'img/iconlylightoutlinesearch@2x.png'%}"
+                    />
+                    <div class="search-input">
+                        <a class="search1">Search</a>
+                    </div>
+                </button>
+              </form> {% endcomment %}
+              <form method="GET" action="{% url 'decoration' %}" class="location-group">
+                <div class="location2">
+                    <div class="location-input"></div>
+                    <div class="location3">LOCATION</div>
+                    <div class="location-date">
+                        <div class="location-calendar">
+                            <img class="map-marker-icon1" loading="lazy" alt="" src="{% static 'img/map-marker@2x.png' %}" />
+                        </div>
+                        <div class="search-location1">
+                            <input class="location" type="text" id="location" name="location" autocomplete="off" placeholder="Enter location"/>
+                            <ul id="location-suggestions" class="dropdown-menu"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="property-type1">
+                    <div class="location-input"></div>
+                    <div class="from2">FROM</div>
+                    <div class="frame-parent31">
+                        <input class="april4" type="date" id="start_date" name="start_date" onchange="setEndDateMin()" value="{{ date_from }}">
+                    </div>
+                </div>
+                <div class="price-range1">
+                    <div class="location-input"></div>
+                    <div class="to2">TO</div>
+                    <div class="price-range-inner1">
+                        <div class="frame-parent31">
+                            <input class="april4" type="date" name="end_date" id="end_date" value="{{ date_to }}">
+                        </div>
+                    </div>
+                </div>  
+                <button class="iconlylight-outlinesearch-group" type="submit">
+                    <img class="iconlylight-outlinesearch1" alt="" src="{% static 'img/iconlylightoutlinesearch@2x.png' %}" />
+                    <div class="search-input">
+                        <a class="search1">Search</a>
+                    </div>
+                </button>
+            </form>            
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="our-package">
+        <div class="our-pacakage-parent">
+          <div class="our-pacakage1" data-scroll-to="ourPackageContent">OUR PACAKAGES</div>
+            {% if no_package %}
+              <div class="select-package">
+                <h1 class="select-our-package1">No Packages Found!</h1> 
+              </div>
+            {% else %}
+              <div class="select-package" data-scroll-to="ourPackageContent">
+                  <h1 class="select-our-package1">Select Our Package</h1>
+                  <div class="package-carousel">
+                    {% for item in packages %}
+                      <div class="carousel-item-parent">
+                        <a href="{% url 'decoration_detail' item.package_id %}" class="carousel-item-link">
+                          <div class="carousel-item" style="background-image: url('{{ item.image.url }}');">
+                              <img
+                                    class="carousel-item-child"
+                                    alt="{{ item.title }}"
+                                    src="{{ item.image.url }}"
+                              />
+                            <div class="carousel-image">
+                                <b class="o00-1">{{ item.price |floatformat:0 }}/-</b>
+                            </div>
+                          </div>
+                        </a>
+                          <div class="rectangle-parent17">
+                            <a href="{% url 'decoration_detail' item.package_id %}" class="carousel-item-link">
+                              <div class="frame-child29"></div>
+                              <div class="birthday-party-p1-parent">
+                                  <div class="birthday-party-">{{ item.title|slice:":30"}}{%if item.title|length > 30 %}...{% endif %}</div>
+                                  <div class="seats-as-beautiful-as-they-are-parent">
+                                      <div class="seats-as-beautiful2">
+                                        {{ item.description|slice:":45" }}{% if item.description|length > 45 %}...{% endif %}
+                                      </div>
+                                      <div class="carousel-button">
+                                          <div class="see-more-button" id="seeMoreButton">
+                                              <a href="{% url 'decoration_detail' item.package_id %}">
+                                                <div class="see-more">See More</div>
+                                              </a>
+                                              <div class="see-more-icon">
+                                                  <img
+                                                      class="vector-icon6"
+                                                      loading="lazy"
+                                                      alt="See More Icon"
+                                                      src= "{% static 'img/vector2.svg' %}"
+                                                  />
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                            </a>
+                            <button class="item-selection" data-item-id="{{ item.package_id }}">
+                              <div class="select9">{% if item.package_id in selected_items %}Selected{% else %}Select{% endif %}</div>
+                            </button>
+                          </div>
+                      </div>
+                    {% endfor %}
+                  </div> 
+              </div>
+              <div class="book-now">
+                  <button class="book-now-button" id="confirmationButton">Book Now</button>
+              </div>
+            {% endif %} 
+        </div>
+      </section>
+      <section class="our-item1">
+        <div class="our-item-content-parent">
+          {% if no_items %}
+            <div class="our-item-content" data-scroll-to="ourItemContent">
+              <div class="our-item-header">
+                <div class="our-item-title">
+                  <div class="our-item2">OUR ITEMS</div>
+                  <h1 class="select-your-items1">No Items Found!</h1>
+                </div>
+              </div>
+            </div>
+          {% else %}
+            <div class="our-item-content" data-scroll-to="ourItemContent">
+              <div class="our-item-header">
+                <div class="our-item-title">
+                  <div class="our-item2">OUR ITEM</div>
+                  <h1 class="select-your-items1">Select Your Items</h1>
+                </div>
+                {% comment %} <div class="item-filter">
+                  <button class="all-filter">
+                    <div class="all">ALL</div>
+                  </button>
+                  <div class="chair1">Chair</div>
+                  <div class="sofa1">Sofa</div>
+                </div> {% endcomment %}
+              </div>
+              <div class="item-carousel">
+                <div class="frame-parent40">
+                  {% for item in items %}
+                  <div class="rectangle-parent17">
+                    <div class="rectangle-parent32" style="background-image: url('{{item.Cover_Image.url}}');">
+                      <img class="carousel-item-child" alt="" src="{{item.Cover_Image.url}}" />
+                      <div class="carousel-item-image">
+                        <b class="item-image-placeholder" style="color:white;">{{ item.Price|floatformat:0 }}/-</b>
+                      </div>
+                    </div>
+                    <div class="carousel-item-details">
+                      <div class="carousel-item-details-child"></div>
+                      <div class="search-parent3">
+                        <div class="modern-chair-group">
+                          <div class="modern-chair3">{{item.Title|slice:":21"}}{% if item.Title|length > 21 %}...{% endif %}</div>
+                          <div class="carousel-item-availability">
+                            <div class="available-5-pices3" data-abl-quantity="{{item.Available_Quantity}}">available {{item.Available_Quantity}} pieces</div>
+                          </div>
+                        </div>
+                        <div class="carousel-item-quantity">
+                          <div class="quantity-parent1">
+                            <div class="quantity3">Quantity</div>
+                            <div class="frame-parent43">
+                              <!-- Decrement Button -->
+                              <div class="bg-parent9">
+                                <img class="bg-icon3" alt="" src="./public/bg1.svg" />
+                                <div class="quantity-button decrement-button">-</div>
+                              </div>
+                  
+                              <!-- Display the quantity number -->
+                              <div class="bg-parent10">
+                                <div class="bg8"></div>
+                                <div class="quantity-display" id="quantityDisplay{{item.Item_ID}}">1</div>
+                              </div>
+                  
+                              <!-- Increment Button -->
+                              <div class="bg-parent11">
+                                <img class="bg-icon3" alt="" src="./public/bg2.svg" />
+                                <div class="quantity-button increment-button">+</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Pass the item ID and quantity using a form or JavaScript -->
+                      <button class="item-selection" data-item-id="{{ item.Item_ID }}" onclick="passData({{ item.Item_ID }})">
+                        <div class="select9">Select</div>
+                      </button>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+              <div class="book-now">
+                <button class="book-now-button" id="confirmationButton2">Book Now</button>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </section>
+    </div>
+    {% include 'components\footer.html'%} <!-- footer -->
+  </body>
+  <script>
+    // Location and Date Search Start
+    $(document).ready(function(){
+        // Handle input event on location field
+        $("#location").on("input", function(){
+            var query = $(this).val();  // Get the current input value
+            
+            // Only trigger autocomplete if the input length is greater than 1
+            if(query.length > 1) {
+                $.ajax({
+                    url: "{% url 'location_autocomplete' %}",  // URL for your location_autocomplete view
+                    data: {
+                        'query': query  // Send the user's input as the query parameter
+                    },
+                    dataType: 'json',
+                    success: function(data){
+                        var dropdown = $("#location-suggestions");
+                        dropdown.empty();  // Clear previous suggestions
+                        
+                        // Check if data exists and populate suggestions
+                        if(data.length > 0) {
+                            $.each(data, function(index, value){
+                                dropdown.append('<li class="suggestion-item">' + value + '</li>');
+                            });
+                        } else {
+                            dropdown.append('<li>No results found</li>');
+                        }
+                        dropdown.show();  // Show the dropdown
+                    }
+                });
+            } else {
+                $("#location-suggestions").hide();  // Hide the dropdown if input is less than 2 characters
+            }
+        });
+  
+        // Handle click event on suggestion items
+        $(document).on("click", ".suggestion-item", function(){
+            var selectedText = $(this).text();  // Get the clicked item's text
+            $("#location").val(selectedText);  // Set the location input to the selected text
+            $("#location-suggestions").hide();  // Hide the dropdown after selection
+        });
+  
+        // Hide dropdown when clicking outside
+        $(document).click(function(e) {
+            if (!$(e.target).closest('#location-suggestions, #location').length) {
+                $("#location-suggestions").hide();
+            }
+        });
+    });
+    // Location and Date Search End
+
+    // date search field Start
+    // Block dates before today for the start date
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('start_date').setAttribute('min', today);
+
+    // Add one day to today's date for the end date
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const minEndDate = tomorrow.toISOString().split('T')[0];
+    document.getElementById('end_date').setAttribute('min', minEndDate);
+
+    // Ensure the end date is at least one day after the start date
+    function setEndDateMin() {
+        const startDate = new Date(document.getElementById('start_date').value);
+        
+        // Add one day to the start date
+        startDate.setDate(startDate.getDate() + 1);
+        
+        // Format the date to YYYY-MM-DD
+        const minEndDate = startDate.toISOString().split('T')[0];
+        
+        // Set the min attribute of the end date
+        document.getElementById('end_date').setAttribute('min', minEndDate);
+    }
+    // date search field End
+  </script>
+</html>

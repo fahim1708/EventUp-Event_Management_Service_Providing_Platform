@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="icon" href="{% static 'img\bihousedoor-1.ico' %}" type="image/x-icon">
+
+    {% comment %} CSS for navbar {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css\global.css' %}">
+    <link rel="stylesheet" href="{% static 'css\decoration_detail.css' %}">
+    <link rel="stylesheet" href="{% static 'css\decoration.css' %}">
+    <title>Profile</title>
+</head>
+<body>
+    {% include 'components\header.html'%}
+    {% include 'components\back_button.html'%}
+    <div class="profile-container">
+        <div class="profile-details">
+            <div class="profile-header">
+                <div class="profile-pic">
+                    {% if user_profile and user_profile.profile_picture %}
+                        <img src="{{ user_profile.profile_picture.url }}">
+                    {% else %}
+                        <i class="fa-solid fa-user"></i>
+                    {% endif %}
+                </div>
+                <div class="profile-name">
+                    {% if not user.first_name and not user.last_name %}
+                        <h3>Complete Your Profile</h3>
+                    {% else %}
+                        <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+                    {% endif %}
+                    <p class="profile-username">{{ user.username }}</p>
+                </div>
+            </div>
+        
+            <!-- Profile Details View -->
+            <div id="profile-view">
+                <table class="profile-table">
+                    <tr class="first">
+                        <th>Email</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Primary Phone Number</th>
+                        <td>{% if user_profile %}{{ user_profile.phone }}{% else %}Not Provided{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>Order Phone Number</th>
+                        <td>
+                            {% if user_profile.order_phone != None %}
+                                {{ user_profile.order_phone }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>District</th>
+                        <td>{% if user_profile %}{{ user_profile.district }}{% else %}Not Provided{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>Thana</th>
+                        <td>{% if user_profile %}{{ user_profile.thana }}{% else %}Not Provided{% endif %}</td>
+                    </tr>
+                    <tr class="last">
+                        <th>Address</th>
+                        <td>{% if user_profile %}{{ user_profile.address }}{% else %}Not Provided{% endif %}</td>
+                    </tr>
+                </table>
+                <button class="btn-edit" onclick="toggleEditForm()">Edit Profile</button>
+            </div>
+        
+            <!-- Profile Edit Form (Hidden by default) -->
+            {% comment %} <div id="profile-edit" style="display: none;">
+                <form method="post" enctype="multipart/form-data" action="{% url 'edit_profile' %}">
+                    {% csrf_token %}
+                    <table class="profile-table">
+                        <tr>
+                            <th>First Name</th>
+                            <td><input type="text" name="first_name" value="{{ user.first_name }}"></td>
+                        </tr>
+                        <tr>
+                            <th>Last Name</th>
+                            <td><input type="text" name="last_name" value="{{ user.last_name }}"></td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td><input type="email" name="email" value="{{ user.email }}" required></td>
+                        </tr>
+                        <tr>
+                            <th>Primary Phone Number</th>
+                            <td><input type="text" name="phone" value="{% if user_profile %}{{ user_profile.phone }}{% endif %}"></td>
+                        </tr>
+                        <tr>
+                            <th>Order Phone Number</th>
+                            <td><input type="text" name="order_phone" value="{% if user_profile %}{{ user_profile.order_phone }}{% endif %}"></td>
+                        </tr>
+                        <tr>
+                            <th>District</th>
+                            <td><input type="text" name="district" value="{% if user_profile %}{{ user_profile.district }}{% endif %}"></td>
+                        </tr>
+                        <tr>
+                            <th>Thana</th>
+                            <td><input type="text" name="thana" value="{% if user_profile %}{{ user_profile.thana }}{% endif %}"></td>
+                        </tr>
+                        <tr>
+                            <th>Address</th>
+                            <td><textarea name="address">{% if user_profile %}{{ user_profile.address }}{% endif %}</textarea></td>
+                        </tr>
+                        <tr>
+                            <th>Profile Picture</th>
+                            <td><input type="file" name="profile_picture"></td>
+                        </tr>
+                    </table>
+                    <button type="submit" class="btn-save">Save Changes</button>
+                    <button type="button" class="btn-cancel" onclick="toggleEditForm()">Cancel</button>
+                </form>
+            </div> {% endcomment %}
+            <div id="profile-edit" style="display: none;">
+                <form method="post" enctype="multipart/form-data" action="{% url 'Profile' %}">
+                    {% csrf_token %}
+                    <table class="profile-table">
+                        <tr>
+                            <th>First Name</th>
+                            <td><input type="text" name="first_name" value="{{ user.first_name }}"></td>
+                        </tr>
+                        <tr>
+                            <th>Last Name</th>
+                            <td><input type="text" name="last_name" value="{{ user.last_name }}"></td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td><input type="email" name="email" value="{{ user.email }}" required></td>
+                        </tr>
+                        <tr>
+                            <th>Primary Phone Number</th>
+                            <td><input type="text" name="phone" value="{% if user_profile %}{{ user_profile.phone }}{% endif %}"></td>
+                        </tr>
+                        <tr>
+                            <th>Order Phone Number</th>
+                            <td><input type="text" name="order_phone" value="{% if user_profile.order_phone != None %}{{ user_profile.order_phone }}{% endif %}"></td>
+                        </tr>
+                        <tr>
+                            <th>District</th>
+                            <td><input type="text" name="district" value="{% if user_profile %}{{ user_profile.district }}{% endif %}"></td>
+                        </tr>
+                        <tr>
+                            <th>Thana</th>
+                            <td><input type="text" name="thana" value="{% if user_profile %}{{ user_profile.thana }}{% endif %}"></td>
+                        </tr>
+                        <tr>
+                            <th>Address</th>
+                            <td><textarea name="address">{% if user_profile %}{{ user_profile.address }}{% endif %}</textarea></td>
+                        </tr>
+                        <tr>
+                            <th>Profile Picture</th>
+                            <td><input type="file" name="profile_picture"></td>
+                        </tr>
+                    </table>
+                    <button type="submit" class="btn-save">Save Changes</button>
+                    <button type="button" class="btn-cancel" onclick="toggleEditForm()">Cancel</button>
+                </form>
+            </div>
+            
+        </div>
+        <!-- Profile Edit Form -->
+        <div class="profile-edit-form" id="edit-profile-form" style="display: none;">
+            <form method="post" action="{% url 'edit_profile' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}">
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="{{ user.email }}">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number:</label>
+                    <input type="text" id="phone" name="phone" value="{{ user_profile.phone }}">
+                </div>
+                <div class="form-group">
+                    <label for="district">District:</label>
+                    <input type="text" id="district" name="district" value="{{ user_profile.district }}">
+                </div>
+                <div class="form-group">
+                    <label for="thana">Thana:</label>
+                    <input type="text" id="thana" name="thana" value="{{ user_profile.thana }}">
+                </div>
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" name="address" value="{{ user_profile.address }}">
+                </div>
+                <button type="submit" class="btn-save">Save Changes</button>
+                <button type="button" class="btn-cancel" onclick="toggleEdit()">Cancel</button>
+            </form>
+        </div>
+    </div>
+    <div class="profile-container">
+        <!-- Orders Section -->
+        <h3 class="my-order-text">My Orders</h3>
+        <div class="order-section">
+            {% if orders %}
+                <table class="order-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Date</th>
+                            <th>Address</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                            <tr onclick="window.location.href='{% url 'order_view' order.order_id %}'">
+                                <td><a href="{% url 'order_view' order.order_id %}">{{ order.order_id }}</a></td>
+                                <td>{{ order.date_from }} to {{ order.date_to }}</td>
+                                <td>{{ order.address }}, {{ order.district }}, {{ order.thana }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="no-orders">You have no orders yet.</p>
+            {% endif %}
+        </div>
+    </div>
+    {% include 'components\footer.html'%}
+</body>
+<script>
+    function toggleEdit() {
+        var form = document.getElementById("edit-profile-form");
+        form.style.display = (form.style.display === "none") ? "block" : "none";
+    }
+    function toggleEditForm() {
+        var profileView = document.getElementById("profile-view");
+        var profileEdit = document.getElementById("profile-edit");
+
+        // Toggle the display between profile view and edit form
+        if (profileView.style.display === "none") {
+            profileView.style.display = "block";
+            profileEdit.style.display = "none";
+        } else {
+            profileView.style.display = "none";
+            profileEdit.style.display = "block";
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,60 @@
+{% load static %}
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/header.css' %}">
+</head>
+<header>
+  <div class="header_parent">
+      <a  href="{% url 'decoration' %}">
+        <div class="sub_parent_1">
+          <div class="logo"><img src="{% static 'img/bihousedoor.svg' %}" alt="EventUp"></div>
+          <div class="logo_text">EventUp</div>
+        </div>
+      </a>
+      <div class="sub_parent_2">
+          {% if user.is_authenticated %}
+            <a href="{% url 'Profile' %}" class="profile-picture-container">
+              {% if profile.profile_picture %}
+                  <img src="{{ profile.profile_picture.url }}" alt="{{ user.username }}" class="profile-picture" data-hover="{{ user.username }}">
+              {% else %}
+                  <i class="fa fa-user" aria-hidden="true" data-hover="{{ user.username }}"></i>
+              {% endif %}
+            </a>
+          {% else %}
+          <a href="{% url 'Login' %}"><i class="fa fa-user" aria-hidden="true" data-hover="Login"></i></a>
+          {% endif %}
+          <i class="fa fa-bars menu-btn" aria-hidden="true" data-hover="Menu"></i>
+      </div>            
+  </div>
+</header>
+<div>
+  <nav class="menu">
+    <ul>
+        <li class="top_item"><a href="{% url 'decoration' %}">Home</a></li>
+        <li class="middle_items"><a id="about" href="#">About</a></li>
+        
+        {% if user.is_authenticated %}
+            <li class="bottom_item"><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+            <li class="middle_items"><a href="{% url 'Login' %}">Login</a></li>
+            <li class="bottom_item"><a href="{% url 'sign_up' %}">Sign Up</a></li>
+        {% endif %}
+    </ul>
+  </nav>
+
+</div>
+
+<script>
+  document.querySelector('.menu-btn').addEventListener('click', function() {
+      document.querySelector('.menu').classList.toggle('show');
+  });
+  var about = document.getElementById("about");
+  if (about) {
+    about.addEventListener("click", function() {
+      var anchor = document.querySelector("[data-scroll-to='about']");
+      if (anchor) {
+        anchor.scrollIntoView({ block: "start", behavior: "smooth"});
+      }
+    });
+  }
+</script>

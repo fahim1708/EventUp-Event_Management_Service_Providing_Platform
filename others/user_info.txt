@@ -1,0 +1,34 @@
+SUPER USER:
+username: Fahim
+password: 700800Fahim
+
+CUSTORMER USER:
+username: muntasir
+password: 800900muntasir
+
+username: redwan
+email: redwanahmed@gmail.com
+password: 800900redwan
+
+username: shafi
+email: shafi@gmail.com
+password: shafi700
+
+username: abir
+email: abir@gmail.com
+password: abir800
+
+email: adib700@gmail.com
+password: 700800
+
+username: fahim
+email: fahim17@gmail.com
+password: 700800900
+
+username: fahim2
+email: fahim172@gmail.com
+password: 700800900
+
+username: atik700
+email: atik700@gmail.com
+password: 700800900
