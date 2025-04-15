@@ -141,4 +141,7 @@ AUTHENTICATION_BACKENDS = [
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'  # Or other preferred backend
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # Optional: expire session when browser closes
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
 
