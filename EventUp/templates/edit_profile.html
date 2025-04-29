@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/edit_profile.css' %}">
+    <title>Edit Profile</title>
+</head>
+<body>
+    <div class="edit-profile-container">
+        <h2>Edit Profile</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" name="first_name" value="{{ user.first_name }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input type="text" name="last_name" value="{{ user.last_name }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" value="{{ user.username }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" value="{{ user.email }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="text" name="phone" value="{{ user_profile.phone }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="district">District</label>
+                <input type="text" name="district" value="{{ user_profile.district }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="thana">Thana</label>
+                <input type="text" name="thana" value="{{ user_profile.thana }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea name="address" required>{{ user_profile.address }}</textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Save Changes</button>
+        </form>
+
+        <button class="btn-cancel" onclick="window.location.href='{% url 'Profile' %}'">Cancel</button>
+    </div>
+</body>
+</html>

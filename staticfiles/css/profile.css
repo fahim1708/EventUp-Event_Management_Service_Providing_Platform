@@ -1,0 +1,300 @@
+/* Profile Section */
+.profile-container {
+    margin: 20px 10%;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 2px 4px 10px 3px rgba(58, 58, 58, 0.08);
+    font-family: 'Arial', sans-serif;
+}
+
+/* Profile Details */
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 5%;
+}
+
+.profile-pic {
+    display: flex; /* Ensure flex layout if not already set */
+    justify-content: center; /* Center the icon */
+    align-items: center; /* Vertically center the icon */
+}
+
+.profile-pic i.fa-solid.fa-user {
+    color: #ddd;
+    width: 118px; /* Same width as the profile image */
+    height: 148px; /* Same height as the profile image */
+    border: 1px solid #ddd; /* Same border as the profile image */
+    border-radius: 10px; /* Same border radius as the profile image */
+    font-size: 48px; /* Adjust this size as needed */
+    display: flex; /* Use flex for alignment */
+    justify-content: center; /* Center icon content */
+    align-items: center; /* Vertically center icon */
+    background-color: white; /* Background to match profile image style */
+    object-fit: cover; /* Maintain aspect ratio if icon image is used */
+}
+
+.profile-pic img {
+    width: 118px;
+    height: 148px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.profile-name {
+    margin-left: 30px;
+}
+
+.profile-name h3 {
+    margin: 10px 0;
+    font-size: 35px;
+    font-weight: bold;
+    color: #333;
+}
+
+.profile-username {
+    font-size: 16px;
+    font-style: italic;
+    color: #777;
+    margin-top: 5px;
+}
+
+/* Profile Edit Form */
+#profile-edit {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    margin: 20px auto;
+}
+
+.profile-table {
+    width: 100%;
+    border-collapse: separate; /* Change to separate to make the borders visible */
+    border: 1px solid #ddd;
+    border-radius: 8px; /* Apply radius to the table only */
+    overflow: hidden; /* Ensure the radius is visible */
+    border-spacing: 0; /* Remove space between cells */
+}
+
+.profile-table th, .profile-table td {
+    padding: 10px 20px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd; /* Ensure border for 2nd column is visible */
+    border-left: none; /* Remove left border to avoid double borders */
+    border-radius: 0; /* Remove radius from cells */
+}
+
+.profile-table th:last-child, .profile-table td:last-child {
+    border-right: none; /* Remove border from the last column */
+}
+
+
+.profile-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    width: 30%;
+}
+
+.profile-table td {
+    width: 70%;
+}
+
+/* Input Fields */
+.profile-table input[type="text"], 
+.profile-table input[type="email"],
+.profile-table textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.profile-table input[type="file"] {
+    padding: 5px;
+    font-size: 16px;
+}
+
+.profile-table textarea {
+    height: 80px;
+    resize: vertical;
+}
+
+/* Edit Button */
+.btn-edit {
+    display: block;
+    width: 200px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    margin: 20px auto;
+}
+
+.btn-edit:hover {
+    background-color: #0056b3;
+}
+
+/* Save and Cancel Buttons */
+.btn-save, .btn-cancel {
+    padding: 10px 30px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+    display: inline-block;
+}
+
+.btn-save {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-save:hover {
+    background-color: #0056b3;
+}
+
+.btn-cancel {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-cancel:hover {
+    background-color: #c82333;
+}
+
+/* Centering the buttons */
+#profile-edit form {
+    text-align: center;
+}
+
+/* Orders Section */
+/* .order-section {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+} */
+
+.order-section h3 {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    color: #333;
+}
+
+.order-table {
+    width: 100%;
+    border-collapse: separate; /* Prevent borders from merging */
+    border: 1px solid #ddd;
+    border-radius: 8px; /* Apply border-radius to the table */
+    overflow: hidden; /* Ensure radius is properly applied */
+    border-spacing: 0; /* Remove gaps between cells */
+}
+
+.order-table th, .order-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+.order-table th:last-child, .order-table td:last-child {
+    border-right: none; /* Remove right border from the last column */
+}
+
+.order-table tbody tr:last-child td {
+    border-bottom: none; /* Remove bottom border from the last row */
+}
+
+
+.order-table td a {
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.order-table td a:hover {
+    text-decoration: underline;
+}
+
+.order-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.order-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* No Orders Message */
+.no-orders {
+    text-align: center;
+    padding: 20px;
+    color: #555;
+}
+
+.my-order-text {
+    margin: 20px 0 20px 0;
+    font-size: 28px;
+    text-align: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .profile-pic i.fa-solid.fa-user {
+        width: 100px; /* Adjust for mobile view */
+        height: 120px; /* Adjust for mobile view */
+        font-size: 40px; /* Adjust icon size for mobile view */
+    }
+
+    .profile-pic img {
+        width: 100px;
+        height: 120px;
+    }
+
+    .profile-name h3 {
+        font-size: 28px;
+    }
+
+    .profile-table th, .profile-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .profile-table th {
+        padding: 10px 0;
+    }
+
+    .btn-save, .btn-cancel {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .order-section h3 {
+        text-align: center;
+    }
+
+    .order-table th, .order-table td {
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+    }
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - EventUp</title>
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <h1>Get Started Now</h1>
+            <div class="illustration-container">
+                <img class="Illustration_3" src="{% static 'img/Illustration-3.svg'%}" alt="Illustration 3">
+                <img class="Illustration_1" src="{% static 'img/Illustration-1.svg'%}" alt="Illustration 1">
+                <img class="Illustration_2" src="{% static 'img/Illustration-2.svg'%}" alt="Illustration 2">
+                <img class="Illustration_4" src="{% static 'img/Illustration-4.svg'%}" alt="Illustration 4">
+            </div>
+        </div>
+        
+        <div class="right-section">
+            <div class="form-container">
+
+                    <div class="logo">
+                        <div>
+                            <a href="{% url 'decoration'%}">
+                                <img src="{% static 'img/bihousedoor.svg'%}" alt="EventUp ">
+                            <a/>
+                        </div>
+                        <a style="text-decoration:none;" href="{% url 'decoration'%}">
+                            <div>EventUp</div>
+                        <a/>
+                    </div>
+                
+                <h2>Create account</h2>
+                <form method="POST" action="{% url 'sign_up' %}">
+                    {% csrf_token %}
+                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="email" name="email" placeholder="Email or phone number" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> Remember me
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" required> I agree to all the <a href="#">Terms and Privacy policy</a>
+                        </label>
+                    </div>
+                    <button type="submit" class="create-account-btn">Create account</button>
+                </form>
+                
+                {% comment %} {% load socialaccount %}
+                <form action="{% provider_login_url 'google' %}?next=/" method="post">
+                    {% csrf_token %}
+                    <input type="submit" class="google-signin-btn" value="Sign-in with Google">
+                </form> {% endcomment %}
+                <p class="login-link">Do you already have an account? <a href="{% url 'Login' %}">Log In</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

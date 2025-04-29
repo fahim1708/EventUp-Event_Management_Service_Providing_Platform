@@ -1,0 +1,175 @@
+body {
+    margin: 0px;
+}
+
+.header_parent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10%;
+    background-color: rgba(112, 71, 234, 0.08); /* Optional: for better visibility */
+}
+
+.sub_parent_1 { 
+    text-decoration: none; /* Remove any text decoration from the link */
+}
+
+.sub_parent_1 .logo, .sub_parent_1 .logo_text {
+    margin-right: 10px; /* Adjust if necessary */
+    font-family: sans-serif;
+    color: #7047ea;
+    text-decoration: none; /* Ensure text inside the div doesn't get underlined */
+}
+
+a {
+    text-decoration: none; /* Remove the underline from the anchor tag */
+}
+
+
+.sub_parent_2 {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Adjust the gap between Profile and Menu as needed */
+    font-size: 24px;
+}
+
+.sub_parent_2 .fa-bars {
+    font-size: 24px; /* Adjust font size for the menu icon */
+}
+
+.profile-picture {
+    width: 40px; /* Adjust the width of the profile picture */
+    height: 40px; /* Adjust the height to match the width */
+    border-radius: 50%; /* Makes the picture a circle */
+    object-fit: cover; /* Ensures the image fits within the circle */
+    border: 2px solid #ffffff; /* Adds a white border around the image */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Optional: Adds a subtle shadow */
+    cursor: pointer; /* Change the cursor to a pointer when hovered */
+    transition: transform 0.2s ease; /* Smooth transition for hover effect */
+    margin-right: 10px; /* Adds spacing between the profile picture and other items */
+}
+
+.menu {
+    display: none; /* Hide menu by default */
+    position: absolute;
+    top: 60px; /* Adjust based on header height */
+    right: 10%; /* Adjust to fit the layout */
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    z-index: 999;
+    width: 200px; /* Set a fixed width for the menu */
+    text-align: left;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    padding: 10px 30px;
+    font-family: sans-serif;
+}
+
+.menu .top_item {
+    padding-top: 20px;
+}
+.menu .bottom_item {
+    padding-bottom: 20px;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: black;
+    display: block;
+}
+
+.menu .middle_items:hover {
+    background-color: rgba(112, 71, 234, 0.08);
+    border-bottom: 1.5px solid rgb(140, 140, 140);
+    border-top: 1.5px solid rgb(140, 140, 140);
+}
+
+.menu .top_item:hover {
+    background-color: rgba(112, 71, 234, 0.08);
+    border-bottom: 1.5px solid rgb(140, 140, 140);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.menu .bottom_item:hover {
+    background-color: rgba(112, 71, 234, 0.08);
+    border-top: 1.5px solid rgb(140, 140, 140);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.menu-btn {
+    cursor: pointer;
+}
+
+.menu.show {
+    display: block;
+    z-index: 999;
+}
+
+.fa-user:hover, .fa-bars:hover {
+    color: rgba(137, 43, 226, 0.781);; /* Change to your desired hover color */
+}
+
+.sub_parent_2 i {
+    position: relative;
+}
+
+.sub_parent_2 i::after {
+    content: attr(data-hover); /* Display the text stored in the 'data-hover' attribute */
+    position: absolute;
+    top: 30px; /* Adjust based on your layout */
+    left: -10px; /* Adjust based on your layout */
+    background-color: rgba(137, 43, 226, 0.372);
+    color: rgb(89, 29, 146);
+    padding: 5px 10px;
+    font-size: 12px;
+    font-family: sans-serif;
+    border-radius: 5px;
+    display: none;
+    z-index: -1;
+}
+
+.sub_parent_2 i:hover::after {
+    display: block;
+}
+
+.profile-picture:hover {
+    transform: scale(1.1); /* Grows the image slightly when hovered */
+}
+
+
+.profile-picture-container {
+    position: relative;
+}
+
+.profile-picture::after {
+    content: attr(data-hover); /* Display the text (username) stored in 'data-hover' */
+    position: absolute;
+    top: 50px; /* Adjust based on your layout */
+    left: 0; /* Adjust as needed */
+    background-color: rgba(137, 43, 226, 0.372);
+    color: rgb(89, 29, 146);
+    padding: 5px 10px;
+    font-size: 12px;
+    font-family: sans-serif;
+    border-radius: 5px;
+    display: none;
+    z-index: 10;
+    white-space: nowrap;
+}
+
+.profile-picture:hover::after {
+    display: block;
+}
+
+
+

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+
+  	<meta charset="utf-8">
+  	<meta name="viewport" content="initial-scale=1, width=device-width">
+
+	{% comment %} CSS for navbar {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css\global.css' %}">
+    <link rel="stylesheet" href="{% static 'css\decoration_detail.css' %}">
+    <link rel="stylesheet" href="{% static 'css\decoration.css' %}">
+
+	{% comment %} CSS for this page only {% endcomment %}
+  	<link rel="stylesheet"  href="{% static 'css/order_confirmation.css'%}" />
+
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Wellfleet:wght@400&display=swap" />
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" />
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martel:wght@400&display=swap" />
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" />
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open Sans:wght@700&display=swap" />
+	<title>Confirm</title>
+</head>
+
+<body>
+    {% include 'components\header.html'%}
+	{% include 'components\back_button.html'%}
+  	<div class="decoration-confirmation-page">
+		<div class="confirm-your-selection">
+			Confirm  Your Selected Packages & Items
+		</div>
+		<div class="selected_table_section">
+			<div class="selected-text">
+				Selected Package and Items
+			</div>
+			<div class="selection-div">
+				<table class="selection-table">
+					<thead>
+						<tr class="table-heading">
+							<th class="header-cell">Image:</th>
+							<th class="header-cell">Item:</th>
+							<th class="header-cell">Price</th>
+							<th class="header-cell">Quantity</th>
+							<th class="header-cell">Total Price</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for package in selected_packages %}
+						<tr class="table-row">
+							<td class="table-img">
+								<img class="table-image" src="{{ package.image.url }}" alt="{{ package.title }}">
+							</td>
+							<td class="table-cell table-title-cell">{{ package.title }} {%if package.title|length > 35 %}...{% endif %}</td>
+							<td class="table-cell ">{{ package.price|floatformat:0 }} /-</td>
+							<td class="table-cell ">1</td>
+							<td class="table-cell">{{ package.price|floatformat:0 }} /-</td>
+						</tr>
+						{% endfor %}
+	
+						{% load custom_filters %}
+						{% for entry in selected_items_with_quantities %}
+						<tr class="table-row">
+							<td class="table-img">
+								<img class="table-image" src="{{ entry.item.Cover_Image.url }}" alt="{{ entry.item.Title }}">
+							</td>
+							<td class="table-cell table-title-cell">
+								{{ entry.item.Title|slice:":35" }}{% if entry.item.Title|length > 35 %}...{% endif %}
+							</td>
+							<td class="table-cell">{{ entry.item.Price|floatformat:0 }} /-</td>
+							<td class="table-cell">{{ entry.quantity}}</td>
+							<td class="table-cell">{{ entry.item.Price|multiply:entry.quantity|floatformat:0 }} /-</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+	
+				<div class="price-item">
+					<div class="total-amount">
+						{% if not selected_items_with_quantities %}Total <span>{{selected_packages|length}} Packages.</span>
+						{% elif not selected_packages %}Total <span>{{selected_items_with_quantities|length}} Items.</span>
+						{% else %}Total <span>{{selected_packages|length}} Packages</span> and <span>{{selected_items_with_quantities|length}} Items.</span>
+						{% endif %}
+					</div>
+					<div class="total-price">
+						Total Cost = <span>{{ total_price|floatformat:0 }}/-</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="confirmation_form_section">
+			<div class="form-header">
+				<p class="form-title">Fill the Form</p>
+				<p class="form-subtitle">Make your Confirmation</p>
+			</div>
+			<form method="POST" onsubmit="return validateDates()">
+				{% csrf_token %}
+				<div class="form-container">
+					<div class="form-row">
+						<div class="cell">
+							<label class="form-label">Name*</label>
+							<input class="form-input" type="text" name="full_name" value="{{ form.full_name.value }}"/>
+						</div>
+					</div>
+					<div class="form-row two-column-row">
+						<div class="cell">
+							<label class="form-label">Email*</label>
+							<input class="form-input" type="email" name="email" value="{{ form.email.value }}" readonly />
+						</div>
+						<div class="cell">
+							<label class="form-label">Phone No *</label>
+							<input class="form-input" type="tel" name="phone_no" value="{{ form.phone_no.value }}" />
+						</div>
+					</div>
+					<div class="form-row two-column-row">
+						<div class="cell">
+							<label class="form-label">Date (From) *</label>
+							<input class="form-input" type="date" id="date_from" name="date_from" value="{{ start_date }}" readonly />
+						</div>
+						<div class="cell">
+							<label class="form-label">Date (To) *</label>
+							<input class="form-input" type="date" id="date_to" name="date_to" value="{{ end_date }}" readonly />
+						</div>						
+					</div>
+					<div class="form-row two-column-row">
+						<div class="cell">
+							<label class="form-label">District *</label>
+							<input class="form-input" type="text" placeholder="Write your district" name="district" required value="{{ form.district.value }}"/>
+						</div>
+						<div class="cell">
+							<label class="form-label">Thana *</label>
+							<input class="form-input" type="text" placeholder="Write your thana" name="thana" required value="{{ form.thana.value }}"/>
+						</div>
+					</div>
+					<div class="form-row full-row">
+						<div class="cell">
+							<label class="form-label">Address *</label>
+							<input class="form-input" type="text" placeholder="Write your address" name="address" required value="{{ form.address.value }}" />
+						</div>
+					</div>
+									
+				</div>
+				<div class="form-buttons">
+					<button type="submit" class="btn confirm-btn">Confirm</button>
+				</div>
+			</form>
+		</div>
+		
+  	</div>
+    {% include 'components\footer.html'%}
+</body>
+{% comment %} ------------------------------- {% endcomment %}
+<script>
+	function goBackWithRefresh() {
+	  // Go back to the previous page
+	  history.back();
+	  
+	  // Set a slight delay to allow the browser to navigate back, then refresh
+	  setTimeout(function() {
+		window.location.reload();
+	  }, 50); // You can adjust the delay if necessary
+	}
+
+	// Set the min and max attributes for date_from and date_to
+	var today = new Date();
+	today.setDate(today.getDate() + 1);
+	var today = today.toISOString().split('T')[0]
+
+	const maxDate = new Date();
+	maxDate.setDate(new Date().getDate() + 31); // Calculate the maximum date (30 days from today)
+	const maxDateStr = maxDate.toISOString().split('T')[0];
+
+	// Set min and max for the date_from and date_to fields
+	document.getElementById('date_from').setAttribute('min', today);
+	document.getElementById('date_from').setAttribute('max', maxDateStr);
+	document.getElementById('date_to').setAttribute('min', dateFrom);
+	document.getElementById('date_to').setAttribute('max', maxDateStr);
+
+	function validateDates() {
+		let dateFrom = new Date(document.getElementById('date_from').value);
+		let dateTo = new Date(document.getElementById('date_to').value);
+		let today = new Date();
+		let maxDate = new Date();
+		maxDate.setDate(today.getDate() + 30);
+
+		// Reset the time to compare only dates
+		today.setHours(0, 0, 0, 0);
+		maxDate.setHours(0, 0, 0, 0);
+
+		// Validate date_from to ensure it is not earlier than today
+		if (dateFrom < today) {
+			alert("Date (From) cannot be in the past.");
+			return false;
+		}
+
+		// Validate date_to
+		if (dateTo < dateFrom || dateTo > maxDate) {
+			alert("DATE TO must be later date or same date to DATE FROM.");
+			return false;
+		}
+
+		return true; // Allow form submission if validation is successful
+	}
+
+</script>
+</html>

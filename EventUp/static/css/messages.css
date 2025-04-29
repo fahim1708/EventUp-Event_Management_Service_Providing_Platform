@@ -1,0 +1,43 @@
+/* Style for the pop-up window */
+.popup {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    padding: 10px 25px;
+    transform: translate(-50%, -50%);
+    background-color: #f9f9f9;
+    border: 1px solid #5555558b;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #7a4eff;
+}
+.popup ul {
+    list-style-type: none;
+    padding: 0;
+    font-family: Roboto;
+}
+.popup li {
+    border-radius: 10px;
+    color: black;
+    font-size: 30px;
+    word-spacing: 5px;
+    margin-bottom: 5px;
+    color: white;
+}
+
+/* Show the pop-up when it's visible */
+.show-popup {
+    display: block;
+    animation: fadeInOut 3s ease-in-out forwards;
+}
+
+/* Animation to fade in and out */
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+}
