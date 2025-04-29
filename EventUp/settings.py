@@ -58,7 +58,11 @@ ROOT_URLCONF = 'EventUp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['EventUp/templates','Decoration/templates'],
+        # 'DIRS': ['EventUp/templates','Decoration/templates'],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'EventUp', 'templates'),
+            os.path.join(BASE_DIR, 'Decoration', 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

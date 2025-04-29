@@ -1,5 +1,6 @@
 SUPER USER:
 username: Fahim
+Email: naimuzzamanfahim17@gmail.com
 password: 700800Fahim
 
 CUSTORMER USER:
