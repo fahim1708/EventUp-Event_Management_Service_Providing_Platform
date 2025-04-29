@@ -61,7 +61,7 @@ TEMPLATES = [
         # 'DIRS': ['EventUp/templates','Decoration/templates'],
         'DIRS': [
             os.path.join(BASE_DIR, 'EventUp', 'templates'),
-            os.path.join(BASE_DIR, 'Decoration', 'templates'),
+            # os.path.join(BASE_DIR, 'Decoration', 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
