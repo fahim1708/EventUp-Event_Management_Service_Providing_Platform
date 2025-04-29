@@ -117,7 +117,7 @@ class Profile(models.Model):
 import uuid
 from datetime import datetime
 class Order_Info(models.Model):
-    order_id = models.BigIntegerField(primary_key=True, editable=False)
+    order_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=255)
     phone_no = models.CharField(max_length=15)
