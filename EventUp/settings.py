@@ -80,12 +80,8 @@ WSGI_APPLICATION = 'EventUp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'LYMKRtDGtGXBciDzFoqlqGwthtgMroXo',
-        'HOST': 'hopper.proxy.rlwy.net',
-        'PORT': '53136',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

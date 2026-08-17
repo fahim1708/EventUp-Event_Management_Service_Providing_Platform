@@ -1,0 +1,43 @@
+# Python virtual environments
+.venv/
+.venv*/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Django local data
+db.sqlite3
+media/
+
+# Secrets / local credentials
+.env
+.env.*
+*.pem
+*.key
+*.secret
+
+# Editor / OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs / test artifacts
+*.log
+.pytest_cache/
+.coverage
+coverage/
+htmlcov/
+
+# Build/package artifacts
+build/
+dist/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
