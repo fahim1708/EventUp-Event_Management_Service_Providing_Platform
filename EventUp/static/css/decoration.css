@@ -384,7 +384,7 @@
 
 .location {
   border:none;
-  width:95px;
+  width:100%;
   position:relative;
   right:4px;
 }
@@ -454,11 +454,11 @@
   flex: 1;
   position: relative;
   display: inline-block;
-  min-width: 111px;
+  min-width: 0;
   z-index: 1;
 }
 .location-date {
-  width: 129px;
+  align-self: stretch;
   display: flex;
   flex-direction: row;
   align-items: flex-start;

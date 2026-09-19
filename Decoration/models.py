@@ -2,7 +2,13 @@ from django.db import models
 from datetime import timedelta
 from django.utils import timezone 
 from django.contrib.auth.models import User
-from .built_in_func import upload_to, get_default_available_to
+from .built_in_func import (
+    get_default_available_to,
+    item_image_upload_to,
+    package_image_upload_to,
+    profile_picture_upload_to,
+    upload_to,
+)
 
 class Customer(models.Model):
     Customer_ID = models.AutoField(primary_key=True)  # Primary Key
@@ -32,7 +38,7 @@ class Package(models.Model):
     title = models.CharField(max_length=255)  # Store the title of the decoration item
     description = models.TextField()  # Store the description
     price = models.DecimalField(max_digits=10, decimal_places=2)  # Store the price
-    image = models.ImageField(upload_to='decorations/packages')  # Store the image
+    image = models.ImageField(upload_to=package_image_upload_to)  # Store the image
     location = models.CharField(max_length=255, default='Unknown')  # Store the location
     quantity = models.PositiveIntegerField()  # Store the quantity
     
@@ -46,7 +52,7 @@ class Item(models.Model):
     Title = models.CharField(max_length=255)
     Price = models.DecimalField(max_digits=10, decimal_places=2)
     Available_Quantity = models.IntegerField()
-    Cover_Image = models.ImageField(upload_to='decorations/items')
+    Cover_Image = models.ImageField(upload_to=item_image_upload_to)
     Location = models.CharField(max_length=255)
     Catagory = models.CharField(default='General', max_length=100)
 
@@ -108,7 +114,7 @@ class Profile(models.Model):
     district = models.CharField(max_length=50)
     thana = models.CharField(max_length=50)
     address = models.TextField()
-    profile_picture = models.ImageField(upload_to='client/profile_pictures', null=True, blank=True)
+    profile_picture = models.ImageField(upload_to=profile_picture_upload_to, null=True, blank=True)
 
     def __str__(self):
         return self.user.username

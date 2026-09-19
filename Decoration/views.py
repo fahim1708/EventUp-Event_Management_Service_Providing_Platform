@@ -58,14 +58,6 @@ def Decoration(request):
     no_package = not packages.exists()
     no_item = not items.exists()
 
-    # Handle AJAX request for location autocomplete
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest' and 'query' in request.GET:
-        query = request.GET.get('query', '')
-        if query:
-            locations = Package.objects.filter(location__icontains=query).values_list('location', flat=True).distinct()
-            return JsonResponse(list(locations), safe=False)
-        return JsonResponse([], safe=False)
-
     # Render the page with decorations and items
     return render(request, 'decoration.html', {
         'packages': packages,
@@ -75,6 +67,20 @@ def Decoration(request):
         'date_from': start_date,
         'date_to': end_date
     })
+
+
+def location_autocomplete(request):
+    query = request.GET.get('query', '').strip()
+    locations = (
+        Item.objects
+        .exclude(Location__isnull=True)
+        .exclude(Location__exact='')
+        .filter(Location__icontains=query)
+        .values_list('Location', flat=True)
+        .distinct()
+        .order_by('Location')[:20]
+    )
+    return JsonResponse(list(locations), safe=False)
 
 
 def view_page_decoration(request):

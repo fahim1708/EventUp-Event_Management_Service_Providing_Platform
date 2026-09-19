@@ -28,6 +28,41 @@ document.addEventListener('DOMContentLoaded', function() {
     const decrementButtons = document.querySelectorAll('.decrement-button');
     const availableDiv = document.querySelectorAll('.available-5-pices3');
 
+    const locationInput = document.getElementById('location');
+    const locationSuggestions = document.getElementById('location-suggestions');
+    if (locationInput && locationSuggestions) {
+        const loadLocations = async function() {
+            const query = encodeURIComponent(locationInput.value.trim());
+            const response = await fetch(`/location-autocomplete/?query=${query}`, {
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            });
+            if (!response.ok) {
+                throw new Error('Unable to load locations');
+            }
+
+            const locations = await response.json();
+            locationSuggestions.replaceChildren();
+            locations.forEach(function(location) {
+                const suggestion = document.createElement('li');
+                suggestion.textContent = location;
+                suggestion.addEventListener('mousedown', function() {
+                    locationInput.value = location;
+                    locationSuggestions.style.display = 'none';
+                });
+                locationSuggestions.appendChild(suggestion);
+            });
+            locationSuggestions.style.display = locations.length ? 'block' : 'none';
+        };
+
+        locationInput.addEventListener('focus', loadLocations);
+        locationInput.addEventListener('input', loadLocations);
+        document.addEventListener('click', function(event) {
+            if (!locationInput.contains(event.target) && !locationSuggestions.contains(event.target)) {
+                locationSuggestions.style.display = 'none';
+            }
+        });
+    }
+
     incrementButtons.forEach((button, index) => {
         button.addEventListener('click', function() {
             const avl_element = availableDiv[index];

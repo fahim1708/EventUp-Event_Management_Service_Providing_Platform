@@ -72,52 +72,6 @@
               </div>
             </div>
             <div>
-              {% comment %} <form method="GET" action="{% url 'decoration' %}" class="location-group">
-                <div class="location2">
-                    <div class="location-input"></div>
-                    <div class="location3">LOCATION</div>
-                    <div class="location-date">
-                        <div class="location-calendar">
-                            <img
-                                class="map-marker-icon1"
-                                loading="lazy"
-                                alt=""
-                                src="{% static 'img/map-marker@2x.png'%}"
-                            />
-                        </div>
-                        <div class="search-location1">
-                            <input class="location" type="text" id="location" name="location" autocomplete="off" placeholder="Enter location"/>
-                            <ul id="location-suggestions" class="dropdown-menu"></ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="property-type1">
-                  <div class="location-input"></div>
-                  <div class="from2">FROM</div>
-                  <div class="frame-parent31">
-                      <input class="april4" type="date" id="start_date" name="start_date" onchange="setEndDateMin()">
-                  </div>
-                </div>
-                <div class="price-range1">
-                  <div class="location-input"></div>
-                  <div class="to2">TO</div>
-                  <div class="price-range-inner1">
-                      <div class="frame-parent31">
-                          <input class="april4" type="date" name="end_date" id="end_date">
-                      </div>
-                  </div>
-                </div>  
-                <button class="iconlylight-outlinesearch-group" type="submit">
-                    <img
-                        class="iconlylight-outlinesearch1"
-                        alt=""
-                        src="{% static 'img/iconlylightoutlinesearch@2x.png'%}"
-                    />
-                    <div class="search-input">
-                        <a class="search1">Search</a>
-                    </div>
-                </button>
-              </form> {% endcomment %}
               <form method="GET" action="{% url 'decoration' %}" class="location-group">
                 <div class="location2">
                     <div class="location-input"></div>
@@ -312,7 +266,7 @@
         </div>
       </section>
     </div>
-    {% include 'components\header.html'%} <!-- footer -->
+    {% include 'components\footer.html'%} <!-- footer -->
   </body>
   <script>
     // Location and Date Search Start
