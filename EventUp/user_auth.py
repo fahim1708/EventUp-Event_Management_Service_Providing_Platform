@@ -27,7 +27,7 @@ def registration2(request):
         user.save()
         return redirect('login')
     
-    return render(request,'Registrations\signup2.html')
+    return render(request,'Registrations/signup2.html')
 
 
 def registration(request):
@@ -54,7 +54,7 @@ def registration(request):
         user.save()
         return redirect('Login')
     
-    return render(request,'Registrations\signup.html')
+    return render(request,'Registrations/signup.html')
 
 def login_view(request):
     if request.method == 'POST':
@@ -69,7 +69,7 @@ def login_view(request):
         else:
             messages.error(request, 'Invalid email or password')
 
-    return render(request, 'Registrations\login.html')
+    return render(request, 'Registrations/login.html')
         
 def logout_view(request):
     logout(request)
@@ -77,7 +77,7 @@ def logout_view(request):
     return redirect('decoration')
 
 def Profile(request):
-    return render(request,'registration\profile.html')
+    return render(request,'registration/profile.html')
 
 def Profile_Update(request):
     if request.method == "POST":
