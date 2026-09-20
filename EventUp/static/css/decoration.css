@@ -589,7 +589,8 @@
   height: 24px;
   width: 24px;
   position: relative;
-  object-fit: cover;
+  color: var(--color-white);
+  font-size: 20px;
   min-height: 24px;
 }
 .search1 {
@@ -1492,7 +1493,11 @@
 .facebook-icon3,
 .instagram-circle-icon3 {
   position: relative;
-  object-fit: cover;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  font-size: 22px;
   z-index: 1;
 }
 .facebook-icon3 {
