@@ -1,11 +1,12 @@
 import os
 import subprocess
+import sys
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'EventUp.settings')
 
 try:
 	subprocess.run(
-		['python', 'manage.py', 'collectstatic', '--noinput'],
+		[sys.executable, 'manage.py', 'collectstatic', '--noinput'],
 		check=True,
 		cwd=os.path.dirname(os.path.dirname(__file__)),
 	)
